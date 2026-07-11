@@ -28,12 +28,12 @@ func main() {
 		{103, "Charlie Brown", "Design", 80000},
 	}
 
-	for colIndex,header := range headers{
-		cellName, err:= excelize.CoordinatesToCellName(colIndex+1,1)
-		if err!=nil{
+	for colIndex, header := range headers {
+		cellName, err := excelize.CoordinatesToCellName(colIndex+1, 1)
+		if err != nil {
 			log.Fatal(err)
 		}
-		f.SetCellValue(sheet,cellName,header)
+		f.SetCellValue(sheet, cellName, header)
 	}
 
 	for rowIndex, rowData := range rows {
@@ -48,8 +48,9 @@ func main() {
 
 	f.SetActiveSheet(index)
 
-
 	if err := f.SaveAs("Employees.xlsx"); err != nil {
 		log.Fatal(err)
 	}
+
+	copyTxtToXlsx()
 }
