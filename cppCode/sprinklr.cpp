@@ -24,7 +24,6 @@ void solve(int V, vector<vector<pair<int, int>>> &graph, int K)
             pq.push({newDist,it.first});
         }
     }
-
     for(int i = 0;i<K;i++){
         cout<<dist[V][i]<<" ";
     }

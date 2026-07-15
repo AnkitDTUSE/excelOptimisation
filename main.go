@@ -1,56 +1,46 @@
 package main
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/xuri/excelize/v2"
 )
 
 func main() {
-	f := excelize.NewFile()
-	defer func() {
-		if err := f.Close(); err != nil {
-			log.Fatal(err)
-		}
-	}()
+	srcFile, _ := excelize.OpenFile("MOCK_TEST_10K.xlsx")
 
-	sheet := "test"
-	index, err := f.NewSheet(sheet)
+	defer srcFile.Close()
 
-	if err != nil {
-		log.Fatal(err)
-	}
+	destFile, _ := excelize.OpenFile("test.xlsx")
 
-	headers := []string{"ID", "Name", "Department", "Salary"}
-	rows := [][]any{
-		{101, "Alice Smith", "Engineering", 95000},
-		{102, "Bob Jones", "Marketing", 72000},
-		{103, "Charlie Brown", "Design", 80000},
-	}
+	defer destFile.Close()
 
-	for colIndex, header := range headers {
-		cellName, err := excelize.CoordinatesToCellName(colIndex+1, 1)
-		if err != nil {
-			log.Fatal(err)
-		}
-		f.SetCellValue(sheet, cellName, header)
-	}
+	srcRows, _ := srcFile.GetRows("Sheet1")
 
-	for rowIndex, rowData := range rows {
-		for colIndex, value := range rowData {
-			cellName, err := excelize.CoordinatesToCellName(colIndex+1, rowIndex+2)
-			if err != nil {
+	destRows, _ := destFile.GetRows("Sheet1")
+
+	startRow := len(destRows) + 1
+
+	for i, row := range srcRows {
+		currentRow := startRow + i
+
+		for colInd, cellValue := range row {
+
+			colName, _ := excelize.ColumnNumberToName(colInd + 1)
+
+			cellCoordinates := fmt.Sprintf("%s%d", colName, currentRow)
+
+			if err := destFile.SetCellValue("Sheet1", cellCoordinates, cellValue); err != nil {
 				log.Fatal(err)
 			}
-			f.SetCellValue(sheet, cellName, value)
+
 		}
+
 	}
 
-	f.SetActiveSheet(index)
-
-	if err := f.SaveAs("Employees.xlsx"); err != nil {
+	if err:= destFile.Save();err!=nil{
 		log.Fatal(err)
 	}
 
-	copyTxtToXlsx()
 }
