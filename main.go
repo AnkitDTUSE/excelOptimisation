@@ -25,6 +25,7 @@ func main() {
 
 	destPath := "test.xlsx"
 	var destFile *excelize.File
+
 	if _, err := os.Stat(destPath); err == nil {
 		destFile, err = excelize.OpenFile(destPath)
 		if err != nil {
@@ -39,6 +40,7 @@ func main() {
 	} else {
 		log.Fatalf("failed to inspect destination workbook %q: %v", destPath, err)
 	}
+
 	defer func() {
 		if err := destFile.Close(); err != nil {
 			log.Printf("failed to close destination workbook: %v", err)
@@ -95,6 +97,8 @@ func main() {
 	saveDuration := time.Since(startTime) - copyDuration
 	fmt.Printf("Saved workbook to %s in %v\n", destPath, saveDuration)
 	fmt.Printf("Total time: %v\n", time.Since(startTime))
+
+	CsvWrite()
 }
 
 // benchmarking
@@ -106,6 +110,12 @@ func main() {
 // 3lkh rows --> Copied 360001 rows in 58.3086173s
 //				 Saved workbook to test.xlsx in 21.4936326s
 // 				 Total time: 1m19.8022499s
+// 
 // 40K rows --> Copied 40033 rows in 4.9196453s
 // 				Saved workbook to test.xlsx in 2.5835634s
 // 				Total time: 7.5032087s
+// 
+// 40K rows CSV --> Copied 40000 rows in 2.3202505s
+// 					Saved workbook in 3.7260253s
+// 					Total time: 6.0462758s
+// 
