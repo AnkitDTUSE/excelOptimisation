@@ -12,7 +12,7 @@ import (
 func main() {
 	startTime := time.Now()
 
-	srcPath := "MOCK_DATA_40K.xlsx"
+	srcPath := "MOCK_DATA.xlsx"
 	srcFile, err := excelize.OpenFile(srcPath)
 	if err != nil {
 		log.Fatalf("failed to open source workbook %q: %v", srcPath, err)
@@ -98,7 +98,7 @@ func main() {
 	fmt.Printf("Saved workbook to %s in %v\n", destPath, saveDuration)
 	fmt.Printf("Total time: %v\n", time.Since(startTime))
 
-	CsvWrite()
+	// CsvWrite()
 }
 
 // benchmarking
@@ -119,3 +119,6 @@ func main() {
 // 					Saved workbook in 3.7260253s
 // 					Total time: 6.0462758s
 // 
+// 3lkh rows --> Copied 360001 rows in 57.1621636s
+// 				 Saved workbook to test.xlsx in 33.3544289s
+// 				 Total time: 1m30.5172252s
