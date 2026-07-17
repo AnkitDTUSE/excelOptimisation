@@ -2,7 +2,7 @@ package main
 
 func main() {
 	// XlsxWriter()
-	BusyWriter()
+	BusyWriter("input.json")
 	// StreamWriter()
 	// CsvWriter()
 }
@@ -32,3 +32,13 @@ func main() {
 // 3lkh rows (streamWriter) --> 360001 new rows (Total rows in file: 360001) in 14.4853067s
 // 				 Saved workbook to test.xlsx in 5.4668493s
 // 				 Total time: 19.9530858s
+// 
+// BUSY writer
+// 
+// 1lkh rows --> 3.799938s time to copy all the rows
+// 				save time 2.5010538s
+// 				wrote: ./recom_report1784283799.xlsx
+//
+// 2lkh rows --> 3.588649s time to copy all the rows
+// 				save time 5.3323977s
+// 				wrote: ./recom_report1784283895.xlsx

@@ -9,7 +9,7 @@ type XlsHeader struct {
 // Dataset represents a dataset to be written in the top header section.
 type Dataset struct {
 	Headers []XlsHeader
-	Data    []map[string]interface{}
+	Data    []map[string]any
 }
 
 // ExcelTopHeader defines metadata and additional layout for the top of the Excel sheet.

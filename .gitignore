@@ -4,3 +4,6 @@ a.*
 input*
 output*
 test.xlsx
+report*
+*.md
+*cppCode/*

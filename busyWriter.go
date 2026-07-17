@@ -10,18 +10,18 @@ import (
 )
 
 type InputPayload struct {
-	Data             []map[string]interface{} `json:"data"`
-	TotalData        []map[string]interface{} `json:"totalData"`
-	Headers          []b.XlsHeader            `json:"headers"`
-	TotalHeaders     []b.XlsHeader            `json:"totalHeaders"`
-	SellerID         int                      `json:"sellerID"`
-	TotalPlaceHolder map[string]string        `json:"totalPlaceHolder"`
-	FPath            string                   `json:"fPath"`
-	ExcelTopHeader   b.ExcelTopHeader         `json:"excelTopHeader"`
+	Data             []map[string]any  `json:"data"`
+	TotalData        []map[string]any  `json:"totalData"`
+	Headers          []b.XlsHeader     `json:"headers"`
+	TotalHeaders     []b.XlsHeader     `json:"totalHeaders"`
+	SellerID         int               `json:"sellerID"`
+	TotalPlaceHolder map[string]string `json:"totalPlaceHolder"`
+	FPath            string            `json:"fPath"`
+	ExcelTopHeader   b.ExcelTopHeader  `json:"excelTopHeader"`
 }
 
-func BusyWriter() {
-	bytes, err := os.ReadFile("input.json")
+func BusyWriter(filePath string) {
+	bytes, err := os.ReadFile(filePath)
 	if err != nil {
 		log.Fatalf("failed to read input.json: %v", err)
 	}

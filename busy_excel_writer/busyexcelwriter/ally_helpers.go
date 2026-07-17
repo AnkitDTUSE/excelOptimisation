@@ -11,7 +11,7 @@ import (
 )
 
 // IfToA converts any interface value (especially float64 or nil) to its string representation.
-func IfToA(value interface{}) string {
+func IfToA(value any) string {
 	if value == nil {
 		return ""
 	} else if reflect.TypeOf(value).Kind() == reflect.Float64 {

@@ -10,7 +10,7 @@ import (
 
 // GenerateExcelfileWithExtraHeadingHeader creates an Excel file with top headers, main headers,
 // data rows, total rows, and returns the file path or an error.
-func GenerateExcelfileWithExtraHeadingHeader(data, totalData []map[string]interface{}, headers, totalHeaders []XlsHeader, sellerID int, totalPlaceHolder map[string]string, fPath string, excelTopHeader ExcelTopHeader) (
+func GenerateExcelfileWithExtraHeadingHeader(data, totalData []map[string]any, headers, totalHeaders []XlsHeader, sellerID int, totalPlaceHolder map[string]string, fPath string, excelTopHeader ExcelTopHeader) (
 	file string, err error) {
 	sTime := time.Now()
 	f := excelize.NewFile()
@@ -34,4 +34,5 @@ func GenerateExcelfileWithExtraHeadingHeader(data, totalData []map[string]interf
 
 	fmt.Printf("save time %v\n",saveT2)
 	return file,nil
+	
 }
